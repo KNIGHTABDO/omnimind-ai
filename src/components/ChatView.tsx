@@ -20,7 +20,8 @@ import {
   ThreadContent,
   ThreadScrollToBottom,
 } from "@/components/nexus-ui/thread";
-import Suggestions, {
+import {
+  Suggestions,
   SuggestionList,
   Suggestion,
 } from "@/components/nexus-ui/suggestions";
@@ -88,7 +89,7 @@ export function ChatView() {
               OmniMind-1 is ready. Ask anything.
             </p>
           </div>
-          <Suggestions onSelect={(q) => sendMessage(q)}>
+          <Suggestions onSelect={(q: string) => sendMessage(q)}>
             <SuggestionList orientation="horizontal" className="flex-wrap justify-center gap-2">
               {SUGGESTIONS.map((s) => (
                 <Suggestion key={s} value={s} variant="outline" className="text-hero-muted border-border hover:text-hero-text">
