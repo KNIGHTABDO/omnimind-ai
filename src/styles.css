@@ -154,6 +154,15 @@
   html::-webkit-scrollbar {
     display: none;
   }
+
+  /* Hide scrollbar on all scrollable containers */
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  *::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* Liquid Glass */
