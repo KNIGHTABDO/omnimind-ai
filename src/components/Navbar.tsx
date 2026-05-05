@@ -1,4 +1,4 @@
-export function Navbar({ onBeginJourney }: { onBeginJourney: () => void }) {
+export function Navbar({ onBeginJourney, showChat }: { onBeginJourney: () => void; showChat: boolean }) {
   return (
     <nav className="relative z-10 flex items-center justify-between px-8 py-6 max-w-7xl mx-auto">
       <span
@@ -10,12 +10,15 @@ export function Navbar({ onBeginJourney }: { onBeginJourney: () => void }) {
 
       <div className="hidden md:flex items-center gap-10" />
 
-      <button
-        onClick={onBeginJourney}
-        className="liquid-glass rounded-full px-6 py-2.5 text-sm text-hero-text transition-transform hover:scale-[1.03] cursor-pointer"
-      >
-        Begin Journey
-      </button>
+      {!showChat && (
+        <button
+          onClick={onBeginJourney}
+          className="liquid-glass rounded-full px-6 py-2.5 text-sm text-hero-text transition-transform hover:scale-[1.03] cursor-pointer"
+        >
+          Begin Journey
+        </button>
+      )}
+      {showChat && <div />}
     </nav>
   );
 }
