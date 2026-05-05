@@ -311,7 +311,7 @@ export function ChatView() {
           <ModelSelector
             value={selectedModel}
             onValueChange={setSelectedModel}
-            items={MODEL_ITEMS.map((m) => ({ value: m.value, label: m.title, description: m.description }))}
+            items={MODEL_ITEMS.map((m) => ({ value: m.value, title: m.title, description: m.description }))}
           >
             <ModelSelectorTrigger className="liquid-glass rounded-full px-3 py-1.5 text-xs text-hero-muted hover:text-hero-text border-0 h-auto" />
             <ModelSelectorContent className="bg-background/95 backdrop-blur-xl border-border">
