@@ -69,6 +69,7 @@
     "streamdown": "^2.5.0",
     "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.2.1",
+    "tldts": "^7.0.30",
     "tw-animate-css": "^1.3.4",
     "use-stick-to-bottom": "^1.1.4",
     "vaul": "^1.1.2",
