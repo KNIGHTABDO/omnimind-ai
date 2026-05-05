@@ -1,11 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "api/index.js",
-      "use": "@vercel/node"
-    }
-  ],
   "rewrites": [
     { "source": "/assets/(.*)", "destination": "/dist/client/assets/$1" },
     { "source": "/images/(.*)", "destination": "/dist/client/images/$1" },
