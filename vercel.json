@@ -1,6 +1,7 @@
 {
   "version": 2,
   "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
+    { "source": "/assets/(.*)", "destination": "/dist/client/assets/$1" },
+    { "source": "/(.*)", "destination": "/api/index.js" }
   ]
 }
