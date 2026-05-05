@@ -1,26 +1,36 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { Navbar } from "@/components/Navbar";
+import { HeroSection } from "@/components/HeroSection";
+import { ChatView } from "@/components/ChatView";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
+function Index() {
+  const [showChat, setShowChat] = useState(false);
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
+    <div className="relative min-h-screen overflow-hidden bg-background">
+      {/* Background GIF */}
       <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
+        src="/images/landscape-bg.gif"
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover z-0"
       />
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-background/60 z-[1]" />
+
+      {/* Navbar */}
+      <Navbar onBeginJourney={() => setShowChat(true)} />
+
+      {/* Hero or Chat */}
+      {!showChat ? (
+        <HeroSection onBeginJourney={() => setShowChat(true)} />
+      ) : (
+        <ChatView />
+      )}
     </div>
   );
-}
-
-function Index() {
-  return <PlaceholderIndex />;
 }
