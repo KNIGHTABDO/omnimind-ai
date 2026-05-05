@@ -29,6 +29,8 @@ import {
   useRef,
   useState,
 } from "react";
+import * as Collapsible from "@radix-ui/react-collapsible";
+import { ChevronDown, ChevronUp, Code2 } from "lucide-react";
 import type {
   BundledLanguage,
   CodeHighlighterPlugin,
@@ -335,9 +337,9 @@ function CodeBlockFigureChrome({
         </div>
       )}
 
-      <CodeBlockViewport rounding={showTitleRow ? "top" : "all"}>
+      <div className="relative group/code-container">
         {children}
-      </CodeBlockViewport>
+      </div>
     </figure>
   );
 }
@@ -517,24 +519,75 @@ function CodeBlockFencedView({
   const raw = useMemo(() => buildRawHighlightResult(trimmed), [trimmed]);
   const title = (language || "code").toLowerCase();
 
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <CodeBlockFigureChrome
-      className={className}
-      copyText={trimmed}
-      isIncomplete={isIncomplete}
-      language={language}
-      showTitleRow={showTitleRow}
-      title={title}
-    >
-      <CodeBlockShikiPre
-        code={trimmed}
-        codePlugin={codePlugin}
+    <Collapsible.Root open={isOpen} onOpenChange={setIsOpen} className="w-full">
+      <CodeBlockFigureChrome
+        className={cn(
+          className,
+          "transition-all duration-300 ease-in-out",
+          !isOpen && "max-h-[120px] overflow-hidden bg-muted/30"
+        )}
+        copyText={trimmed}
+        isIncomplete={isIncomplete}
         language={language}
-        lineNumbers={lineNumbers}
-        lineNumbersStart={startLine ?? 1}
-        raw={raw}
-      />
-    </CodeBlockFigureChrome>
+        showTitleRow={showTitleRow}
+        title={title}
+      >
+        {!isOpen && (
+          <div className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-linear-to-b from-transparent via-card/80 to-card backdrop-blur-[2px] transition-all duration-300">
+            <Collapsible.Trigger asChild>
+              <button className="group flex items-center gap-2 rounded-full bg-hero-text px-4 py-2 text-xs font-semibold text-background shadow-lg transition-all hover:scale-105 active:scale-95">
+                <Code2 className="size-3.5 transition-transform group-hover:rotate-12" />
+                <span>View {title} snippet</span>
+                <ChevronDown className="size-3.5" />
+              </button>
+            </Collapsible.Trigger>
+            <span className="mt-2 text-[10px] text-hero-muted/50 uppercase tracking-tight">
+              {trimmed.split('\n').length} lines of code
+            </span>
+          </div>
+        )}
+
+        <Collapsible.Content className="CollapsibleContent overflow-hidden transition-all duration-300">
+          <CodeBlockViewport rounding={showTitleRow ? "top" : "all"}>
+            <CodeBlockShikiPre
+              code={trimmed}
+              codePlugin={codePlugin}
+              language={language}
+              lineNumbers={lineNumbers}
+              lineNumbersStart={startLine ?? 1}
+              raw={raw}
+            />
+          </CodeBlockViewport>
+          
+          <div className="flex justify-center pb-3 pt-1">
+            <Collapsible.Trigger asChild>
+              <button className="flex items-center gap-1.5 rounded-full bg-secondary/50 px-3 py-1 text-[10px] font-medium text-hero-muted hover:bg-secondary hover:text-hero-text transition-colors">
+                <ChevronUp className="size-3" />
+                Collapse
+              </button>
+            </Collapsible.Trigger>
+          </div>
+        </Collapsible.Content>
+
+        {!isOpen && (
+           <div className="opacity-20 pointer-events-none scale-95 blur-[1px] grayscale">
+             <CodeBlockViewport rounding={showTitleRow ? "top" : "all"}>
+                <CodeBlockShikiPre
+                  code={trimmed.split('\n').slice(0, 2).join('\n')}
+                  codePlugin={codePlugin}
+                  language={language}
+                  lineNumbers={lineNumbers}
+                  lineNumbersStart={startLine ?? 1}
+                  raw={raw}
+                />
+              </CodeBlockViewport>
+           </div>
+        )}
+      </CodeBlockFigureChrome>
+    </Collapsible.Root>
   );
 }
 

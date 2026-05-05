@@ -12,6 +12,8 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@ai-sdk/openai": "^3.0.60",
+    "@ai-sdk/react": "^3.0.177",
     "@cloudflare/vite-plugin": "^1.25.5",
     "@hookform/resolvers": "^5.2.2",
     "@hugeicons/core-free-icons": "^4.1.1",
@@ -51,6 +53,8 @@
     "@tanstack/react-router": "^1.168.0",
     "@tanstack/react-start": "^1.167.14",
     "@tanstack/router-plugin": "^1.167.10",
+    "ai": "^6.0.175",
+    "axios": "^1.16.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
@@ -71,6 +75,7 @@
     "tailwindcss": "^4.2.1",
     "tldts": "^7.0.30",
     "tw-animate-css": "^1.3.4",
+    "tw-shimmer": "^0.4.11",
     "use-stick-to-bottom": "^1.1.4",
     "vaul": "^1.1.2",
     "vite-tsconfig-paths": "^6.0.2",

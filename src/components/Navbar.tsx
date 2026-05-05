@@ -1,14 +1,21 @@
+import { Link } from "@tanstack/react-router";
+
 export function Navbar({ onBeginJourney, showChat }: { onBeginJourney: () => void; showChat: boolean }) {
   return (
     <nav className="relative z-10 flex items-center justify-between px-8 py-6 max-w-7xl mx-auto">
-      <span
-        className="text-3xl tracking-tight text-hero-text"
+      <Link
+        to="/"
+        className="text-3xl tracking-tight text-hero-text hover:opacity-80 transition-opacity cursor-pointer text-left"
         style={{ fontFamily: "var(--font-display)" }}
       >
         OmniMind<sup className="text-xs">®</sup>
-      </span>
+      </Link>
 
-      <div className="hidden md:flex items-center gap-10" />
+      <div className="hidden md:flex items-center gap-10">
+        <Link to="/story" className="text-[10px] font-bold text-hero-muted hover:text-hero-text uppercase tracking-[0.2em] transition-colors">Our Story</Link>
+        <Link to="/changelog" className="text-[10px] font-bold text-hero-muted hover:text-hero-text uppercase tracking-[0.2em] transition-colors">Changelog</Link>
+        <Link to="/legal" className="text-[10px] font-bold text-hero-muted hover:text-hero-text uppercase tracking-[0.2em] transition-colors">Legal</Link>
+      </div>
 
       {!showChat && (
         <button
