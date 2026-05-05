@@ -23,7 +23,7 @@ function Index() {
       <div className="absolute inset-0 bg-background/60 z-[1]" />
 
       {/* Navbar */}
-      <Navbar onBeginJourney={() => setShowChat(true)} />
+      <Navbar onBeginJourney={() => setShowChat(true)} showChat={showChat} />
 
       {/* Hero or Chat */}
       {!showChat ? (
